@@ -38,18 +38,6 @@ const QuestionForm = ({question, questionsList, answersList, setAnswersList, set
 
   const NextHandler = () => {
     setCurrQuestion(currQuestion => currQuestion + 1);
-    const updateUnswer = answersList.filter(answr => answr.id === question.id);
-    if(updateUnswer.length > 0){
-      const newAnswerList = answersList.map(answr =>{
-        if(answr.id === question.id){
-          answr.answer = answer.answer
-        }
-        return answr;
-      })
-      setAnswersList(newAnswerList);
-    } else {
-      setAnswersList([...answersList, answer]);
-    }
     setAnswer({
       id: 0,
       answer: ''
@@ -62,6 +50,18 @@ const QuestionForm = ({question, questionsList, answersList, setAnswersList, set
 
   const AnswerHandler = (e) => {
     setAnswer({...answer, id: question.id, [e.target.name]: e.target.value});
+    const updateUnswer = answersList.filter(answr => answr.id === question.id);
+    if(updateUnswer.length > 0){
+      const newAnswerList = answersList.map(answr =>{
+        if(answr.id === question.id){
+          answr.answer = answer.answer
+        }
+        return answr;
+      })
+      setAnswersList(newAnswerList);
+    } else {
+      setAnswersList([...answersList, answer]);
+    }
   }
 
   return (
