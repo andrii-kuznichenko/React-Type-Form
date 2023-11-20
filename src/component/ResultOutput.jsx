@@ -9,7 +9,7 @@ function ResultOutput({answersList,questionsList}) {
     <div>{questionsList.map(question => (
       answersList.map(answer => {
         if(question.id === answer.id){
-           return (<p>{question.text} : {answer.answer}</p>)
+           return (<p key={question.id}>{question.text} : {answer.answer}</p>)
         }
       })
     ))}</div>

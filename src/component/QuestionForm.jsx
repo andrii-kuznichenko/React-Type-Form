@@ -12,6 +12,7 @@ const QuestionForm = ({question, questionsList, answersList, setAnswersList, set
   const [previousClick, setPreviousClick] = useState(true);
 
   useEffect(() => {
+    
     const thisAnswer = answersList.filter(answerNav => {
       return answerNav.id === question.id
     });
@@ -33,11 +34,13 @@ const QuestionForm = ({question, questionsList, answersList, setAnswersList, set
 
   const ReturnHandler = () => {
     setCurrQuestion(currQuestion => currQuestion - 1);
+    saveAnswer();
     setPreviousClick(!previousClick);
   }
 
   const NextHandler = () => {
     setCurrQuestion(currQuestion => currQuestion + 1);
+    saveAnswer();
     setAnswer({
       id: 0,
       answer: ''
@@ -50,6 +53,9 @@ const QuestionForm = ({question, questionsList, answersList, setAnswersList, set
 
   const AnswerHandler = (e) => {
     setAnswer({...answer, id: question.id, [e.target.name]: e.target.value});
+  }
+  
+  const saveAnswer = () => {
     const updateUnswer = answersList.filter(answr => answr.id === question.id);
     if(updateUnswer.length > 0){
       const newAnswerList = answersList.map(answr =>{
